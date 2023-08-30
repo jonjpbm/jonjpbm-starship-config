@@ -1,0 +1,56 @@
+# A minimal left prompt
+format = """
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status"""
+
+# move the rest of the prompt to the right
+right_format = """$all"""
+
+# Inserts a blank line between shell prompts
+add_newline = false
+
+# Make prompt a single line instead of two lines
+[line_break]
+disabled = false
+
+[aws]
+format = ' [$symbol($profile )(\($region\) )(\[$duration\] )]($style)'
+symbol = '󰸏 '
+force_display = true
+
+[gcloud]
+disabled = true
+
+[kubernetes]
+format = '[$symbol$context( \($namespace\))]($style) '
+disabled = false
+
+[terraform]
+symbol = '󱁢 '
+format = ' [$symbol$workspace]($style) '
+
+[time]
+disabled = false
+format = '[$time]($style)'
+time_format = '%F%T%z'
+
+[git_status]
+ahead = '⇡${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+behind = '⇣${count}'
+stashed = '$${count}'
+staged = '+${count}'
+untracked = '?${count}'
+modified = '!${count}'
+deleted = '✘${count}'
+
+[custom.ibm]
+symbol = 'ɪʙᴍ'
+disabled = false
+command = 'ibmcloud target --output json | jq .account.name | sed s/null//' # shows output of command
+when = ''' test true = true '''
+format = ' [$symbol:$output]($style) '
